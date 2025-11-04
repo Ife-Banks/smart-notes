@@ -5,9 +5,10 @@ import Footer from "./Footer"; // Import Footer component
 import Note from "./Note"; // Import Note component
 import CreateArea from "./CreateArea"; // Import CreateArea component
 import "../styles.css"
+import supabase from '../config/supabaseClient';
 
 function TodoPage() {
-
+  console.log(supabase)
     // State for input fields (title and content)
   const [inputText, setInputText] = useState({
     title: "",
