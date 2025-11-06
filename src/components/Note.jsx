@@ -1,19 +1,25 @@
-import React from "react"; // Import React library
+import React from "react";
 
 // Note component receives props from parent
-function Note(props) {
-  // Function to handle delete button click
-  const handleClick = () => {
-    props.onDelete(props.id); // Call onDelete function passed from parent with note id
-  };
+function Note({ id, title, content, onDelete, smoothie }) {
+    // Function to handle delete button click
+    const handleClick = () => {
+        onDelete(id); // Call onDelete function passed from parent with note id
+    };
 
-  return (
-    <div className="note"> {/* Container for the note */}
-      <h1>{props.title}</h1> {/* Display note title */}
-      <p>{props.content}</p> {/* Display note content */}
-      <button onClick={handleClick}>DELETE</button> {/* Delete button triggers handleClick */}
-    </div>
-  );
+    // If smoothie prop exists, use it (for backward compatibility)
+    // Otherwise use individual props
+    const noteTitle = smoothie ? smoothie.title : title;
+    const noteContent = smoothie ? smoothie.content : content;
+    const noteId = smoothie ? smoothie.id : id;
+
+    return (
+        <div className="note">
+            <h1>{noteTitle}</h1>
+            <p>{noteContent}</p>
+            <button onClick={() => onDelete(noteId)}>DELETE</button>
+        </div>
+    );
 }
 
-export default Note; // Export Note component for use in other files
+export default Note;
